@@ -26,9 +26,23 @@ module.exports = app => {
         app.delete('/api/notes:id', function(req, res) {
             notes.splice(req.params.id, 1);
             updateDb();
-            console.log("Deleted note with id " +req.params.id);
+            console.log('Deleted note with id ' +req.params.id);
         });
 
+        app.get('/notes', function(req,res) {
+            res.sendFile(path.join(__dirname, '../public/notes.html'));
+        });
 
-    })
+        app.get('*', function(req, res) {
+            res.sendFile(path.join(__dirname, '../public/index.html'));
+        });
+
+        function updateDb() {
+            fs.writeFile('db/db.json', JSON.stringify(notes, '/t'), err => {
+                if (err) throw err;
+                return true;
+            });
+        }
+
+    });
 }
