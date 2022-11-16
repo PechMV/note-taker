@@ -33,9 +33,9 @@ module.exports = app => {
             res.sendFile(path.join(__dirname, '../public/notes.html'));
         });
 
-        app.get('*', function(req, res) {
-            res.sendFile(path.join(__dirname, '../public/index.html'));
-        });
+        // // app.get('*', function(req, res) {
+        //     res.sendFile(path.join(__dirname, '../public/index.html'));
+        // });
 
         function updateDb() {
             fs.writeFile('db/db.json', JSON.stringify(notes, '/t'), err => {
